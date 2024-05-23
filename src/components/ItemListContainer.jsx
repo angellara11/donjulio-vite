@@ -1,23 +1,3 @@
-// import { useParams } from "react-router-dom";
-// import { getCategory } from "../asyncMock";
-
-// export const ItemListContainer = () => {
-//   const { id } = useParams();
-
-//   const productList = getCategory(id);
-//   console.log(productList);
-
-//   return (
-//     <div className="text-center">
-//       <h2>Productos en: {id}</h2>
-//       <ul>
-//         {productList.map((product) => (
-//           <li>{product.name}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCategory } from "../asyncMock";

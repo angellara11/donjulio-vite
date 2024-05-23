@@ -1,10 +1,3 @@
-// import { useParams } from "react-router-dom";
-
-// export const ItemDetailContainer = () => {
-//   const { id } = useParams();
-
-//   return <div className="text-center">Item Detail</div>;
-// };
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProduct } from "../asyncMock";

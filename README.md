@@ -1,5 +1,9 @@
 # React + Vite
 
+Esto es un ecommerce de bebidas espirituosas, exactamente de tequila.
+Se ha usado tailwind para los estilos.
+Este proyecto es realizado para un curso de programacion llamado Coderhouse.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

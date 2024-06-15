@@ -15,7 +15,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="h-14 w-screen bg-black py-2 px-10 flex items-center justify-between">
+    <div className="h-14 w-screen bg-black py-2 px-10 flex items-center justify-between fixed top-0 z-50">
       <button className="md:hidden text-white text-3xl" onClick={toggleMenu}>
         ☰
       </button>

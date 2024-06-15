@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { CartContext } from "./CartContext";
 import { dataBase } from "../firebase/config";
+import ItemCount from "./ItemCount";
 
 const ItemDetailContainer = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [quantity, setQuantity] = useState(1);
   const { addToCart, getCartProductQuantity } = useContext(CartContext);
 
   useEffect(() => {
@@ -19,10 +19,10 @@ const ItemDetailContainer = () => {
         if (docSnap.exists()) {
           setProduct({ ...docSnap.data(), id: docSnap.id });
         } else {
-          console.log("No existe tal documento!");
+          console.log("No such document!");
         }
       } catch (error) {
-        console.error("Error al recuperar productos:", error);
+        console.error("Error fetching product:", error);
       }
     };
 
@@ -31,19 +31,7 @@ const ItemDetailContainer = () => {
     }
   }, [id]);
 
-  const handleIncrement = () => {
-    if (quantity < product.stock - getCartProductQuantity(product.id)) {
-      setQuantity((prevQuantity) => prevQuantity + 1);
-    }
-  };
-
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
-    }
-  };
-
-  const handleAddToCart = () => {
+  const handleAddToCart = (quantity) => {
     addToCart(product, quantity);
     console.log(`Added ${quantity} of ${product.name} to cart`);
   };
@@ -61,6 +49,7 @@ const ItemDetailContainer = () => {
       <div className="text-center mb-8">Item Detail</div>
       <div className="flex-grow flex items-center justify-center">
         <div className="flex flex-col items-center text-center gap-4">
+          <h2 className="text-lg font-bold mb-7">{product.name}</h2>
           {product.image ? (
             <div className="w-full flex justify-center">
               <img
@@ -74,40 +63,19 @@ const ItemDetailContainer = () => {
               No Image
             </div>
           )}
-          <h2 className="text-lg font-bold">{product.name}</h2>
-          <p className="text-sm">ID: {product.id}</p>
-          <p className="text-sm">Category: {product.category}</p>
-          <p className="text-sm">Price: ${product.price}</p>
-          <p className="text-sm">Stock: {availableStock}</p>
-          <div className="flex items-center gap-4">
-            <button
-              onClick={handleDecrement}
-              className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded"
-              disabled={quantity <= 1}
-            >
-              -
-            </button>
-            <span>{quantity}</span>
-            <button
-              onClick={handleIncrement}
-              className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded"
-              disabled={quantity >= availableStock}
-            >
-              +
-            </button>
-          </div>
-          <button
-            onClick={handleAddToCart}
-            disabled={isMaxStockReached}
-            className={`px-4 py-2 mt-2 rounded ${
-              isMaxStockReached
-                ? "bg-gray-200 text-gray-400 cursor-not-allowed hover:text-gray-500"
-                : "bg-blue-500 text-white hover:bg-blue-600"
-            }`}
-            style={isMaxStockReached ? { cursor: "not-allowed" } : {}}
-          >
-            {isMaxStockReached ? "Fuera de stock" : "Añadir al carrito"}
-          </button>
+          <p className="text-lg w-1/2">{product.description}</p>
+          {/* aqui le he
+          quitado el id porque me parecia feo como se veia, pero lo dejo ahi
+          como referencia */}
+          {/* <p className="text-sm">ID: {product.id}</p> */}
+          <p className="text-lg">Category: {product.category}</p>
+          <p className="text-lg">Price: ${product.price}</p>
+          <p className="text-lg">Stock: {availableStock}</p>
+          <ItemCount
+            stock={availableStock}
+            initial={1}
+            onAdd={handleAddToCart}
+          />
         </div>
       </div>
     </div>

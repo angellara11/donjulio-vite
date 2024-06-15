@@ -46,7 +46,6 @@ const CheckoutForm = () => {
       return;
     }
 
-    // Create order object
     const order = {
       buyer: formData,
       items: cart,
@@ -62,14 +61,14 @@ const CheckoutForm = () => {
     } catch (error) {
       console.error("Error añadiendo el documento: ", error);
       setErrorMessage(
-        "Ocurrio un error mientras se procesaba su pedido. Por favor intentalo de nuevo."
+        "Ocurrió un error mientras se procesaba su pedido. Por favor, inténtelo de nuevo."
       );
     }
     setIsSubmitting(false);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center">
+    <div className="min-h-screen flex flex-col items-center p-4 md:p-8">
       <h2 className="text-2xl font-bold my-4">Checkout Form</h2>
       {orderId ? (
         <div className="text-center">

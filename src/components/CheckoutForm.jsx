@@ -56,7 +56,6 @@ const CheckoutForm = () => {
 
     setIsSubmitting(true);
     try {
-      // Save order to Firestore
       const docRef = await addDoc(collection(dataBase, "orders"), order);
       setOrderId(docRef.id);
       clearCart();

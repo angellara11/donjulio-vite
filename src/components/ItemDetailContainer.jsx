@@ -45,7 +45,7 @@ const ItemDetailContainer = () => {
   const isMaxStockReached = quantityInCart >= product.stock;
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col p-4">
       <div className="text-center mb-8">Item Detail</div>
       <div className="flex-grow flex items-center justify-center">
         <div className="flex flex-col items-center text-center gap-4">
@@ -63,11 +63,10 @@ const ItemDetailContainer = () => {
               No Image
             </div>
           )}
-          <p className="text-lg w-1/2">{product.description}</p>
-          {/* aqui le he
-          quitado el id porque me parecia feo como se veia, pero lo dejo ahi
-          como referencia */}
-          {/* <p className="text-sm">ID: {product.id}</p> */}
+          <p className="text-lg w-full sm:w-1/2 px-4 sm:px-0">
+            {product.description}
+          </p>{" "}
+          {/* Ajustado para una mejor lectura en móvil */}
           <p className="text-lg">Category: {product.category}</p>
           <p className="text-lg">Price: ${product.price}</p>
           <p className="text-lg">Stock: {availableStock}</p>
